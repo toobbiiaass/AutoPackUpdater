@@ -174,6 +174,7 @@ public class Main {
 
                 if(entryName.contains("particle") && entryName.contains("particles")){ //gen particles
                     if (entryName.endsWith("particles.png") && allParticleEntries != null) {
+                        System.out.println("Splitting particle");
                         File tempImage = File.createTempFile("particles", ".png");
                         try (FileOutputStream fos = new FileOutputStream(tempImage)) {
                             fos.write(entryData);
@@ -200,7 +201,6 @@ public class Main {
                         }
                         continue;
                     }
-
                 }
 
 
@@ -216,6 +216,7 @@ public class Main {
                         !entry.isDirectory() &&
                         (entryName.contains("/item/") || entryName.contains("/items/") ||
                                 entryName.contains("/textures/entity/") || entryName.contains("/textures/models/"))) {
+                    System.out.println("Generating netherite piece");
 
                     byte[] netheriteImageData = recolorToNetherite(entryData);
 
@@ -239,9 +240,6 @@ public class Main {
 
 
                 }
-
-
-
 
                 if (createoffhand) {
                     if (entryName.endsWith("widgets.png")) {
@@ -267,8 +265,6 @@ public class Main {
 
                 writeZipEntryIfNotExists(zipOutput, alreadyWrittenPaths, newEntryName, entryData);
                 allZipEntries.put(entryName, entryData);
-
-
             }
 
 
@@ -357,9 +353,6 @@ public class Main {
                     }
                 }
             }
-
-
-
             zipOutput.close();
 
             if (needsUpgrade) {
@@ -444,7 +437,6 @@ public class Main {
         }
     }
 
-
     public static byte[] cleanTransparentPixels(byte[] imageData) {
         try (ByteArrayInputStream bis = new ByteArrayInputStream(imageData)) {
             BufferedImage image = ImageIO.read(bis);
@@ -504,6 +496,7 @@ public class Main {
 
         return directories;
     }
+
     private static void objcutter(List<ParticleEntry> particles, File imageP, Path outputFolder) {
         if (!imageP.exists()) {
             return;
@@ -542,6 +535,7 @@ public class Main {
             }
         }
     }
+
     public static String renameZipPath(String entryName, RenameEntry rename) {
         String[] oldParts = rename.old.startsWith("/") ? rename.old.substring(1).split("/") : rename.old.split("/");
         String[] newParts = rename.neww.startsWith("/") ? rename.neww.substring(1).split("/") : rename.neww.split("/");
@@ -558,6 +552,7 @@ public class Main {
 
         return null;
     }
+
     public static String renameItemNameInPath(String entryName, List<RenameEntry> renames) {
         for (RenameEntry e : renames) {
             if (entryName.contains(e.old)) {
@@ -567,6 +562,7 @@ public class Main {
         }
         return entryName;
     }
+
     public static byte[] updatePackMcmeta(byte[] entryData, int currentFormat, int targetFormat) {
         try {
             String jsonString = new String(entryData, StandardCharsets.UTF_8);
@@ -588,6 +584,7 @@ public class Main {
 
         return entryData;
     }
+
     public static byte[] recolorToNetherite(byte[] imageData) {
         try (ByteArrayInputStream bis = new ByteArrayInputStream(imageData)) {
             BufferedImage image = ImageIO.read(bis);
@@ -686,5 +683,4 @@ public class Main {
         g.dispose();
         return flipped;
     }
-
 }
