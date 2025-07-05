@@ -153,6 +153,7 @@ public class Main {
 
                 String entryName = entry.getName();
                 String newEntryName = entryName;
+                //System.out.println(entryName);
 
                 //Rename folders
                 if(allFoldersToRename != null){
@@ -253,7 +254,8 @@ public class Main {
                     if (entryName.endsWith("icons.png")
                             && !entryName.contains("achievement")
                             && !entryName.contains("stats")
-                            && !entryName.contains("map")) {
+                            && !entryName.contains("map")
+                            && !entryName.contains("invitation")) {
                         iconsImage = File.createTempFile("icons", ".png");
                         try (FileOutputStream fos = new FileOutputStream(iconsImage)) {
                             fos.write(entryData);
