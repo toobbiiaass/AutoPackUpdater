@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AutoPackUpdater:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/AutoPackUpdater_jar</output-path>
+    <root id="archive" name="AutoPackUpdater.jar">
+      <element id="module-output" name="AutoPackUpdater" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,230 @@
+{
+  "Widgets": {
+    "oldPath": "/assets/minecraft/textures/gui",
+    "newPath": "/assets/minecraft/textures/gui/sprites/hud",
+    "files": [
+      {
+        "id": 1,
+        "oldname": "widgets.png",
+        "newname": "hotbar.png",
+        "x": 0,
+        "y": 0,
+        "xLength": 182,
+        "yLength": 22
+      },
+      {
+        "id": 2,
+        "oldname": "widgets.png",
+        "newname": "hotbar_selection.png",
+        "x": 0,
+        "y": 22,
+        "xLength": 24,
+        "yLength": 23
+      }
+    ]
+  },
+  "Icons": {
+    "oldPath": "/assets/minecraft/textures/gui",
+    "newPath": "/assets/minecraft/textures/gui/sprites/hud",
+    "files": [
+      {
+        "id": 1,
+        "oldname": "icons.png",
+        "newname": "crosshair.png",
+        "x": 0,
+        "y": 0,
+        "xLength": 16,
+        "yLength": 16
+      },
+      {
+        "id": 2,
+        "oldname": "icons.png",
+        "newname": "air.png",
+        "x": 16,
+        "y": 18,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 3,
+        "oldname": "icons.png",
+        "newname": "air_bursting.png",
+        "x": 25,
+        "y": 18,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 4,
+        "oldname": "icons.png",
+        "newname": "food_full.png",
+        "x": 52,
+        "y": 27,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 5,
+        "oldname": "icons.png",
+        "newname": "food_half.png",
+        "x": 61,
+        "y": 27,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 6,
+        "oldname": "icons.png",
+        "newname": "armor_empty.png",
+        "x": 16,
+        "y": 9,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 7,
+        "oldname": "icons.png",
+        "newname": "armor_half.png",
+        "x": 25,
+        "y": 9,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 8,
+        "oldname": "icons.png",
+        "newname": "armor_full.png",
+        "x": 34,
+        "y": 9,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 9,
+        "oldname": "icons.png",
+        "newname": "food_empty.png",
+        "x": 16,
+        "y": 27,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 10,
+        "oldname": "icons.png",
+        "newname": "food_empty_hunger.png",
+        "x": 133,
+        "y": 27,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 11,
+        "oldname": "icons.png",
+        "newname": "food_full_hunger.png",
+        "x": 88,
+        "y": 27,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 12,
+        "oldname": "icons.png",
+        "newname": "food_half_hunger.png",
+        "x": 97,
+        "y": 27,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 13,
+        "oldname": "icons.png",
+        "newname": "full.png;heart",
+        "x": 52,
+        "y": 0,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 14,
+        "oldname": "icons.png",
+        "newname": "half.png;heart",
+        "x": 61,
+        "y": 0,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 15,
+        "oldname": "icons.png",
+        "newname": "full_blinking.png;heart",
+        "x": 70,
+        "y": 0,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 16,
+        "oldname": "icons.png",
+        "newname": "half_blinking.png;heart",
+        "x": 79,
+        "y": 0,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 17,
+        "oldname": "icons.png",
+        "newname": "absorbing_full.png;heart",
+        "x": 88,
+        "y": 0,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 18,
+        "oldname": "icons.png",
+        "newname": "absorbing_half.png;heart",
+        "x": 97,
+        "y": 0,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 19,
+        "oldname": "icons.png",
+        "newname": "container_blinking.png;heart",
+        "x": 25,
+        "y": 0,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 20,
+        "oldname": "icons.png",
+        "newname": "container.png;heart",
+        "x": 16,
+        "y": 0,
+        "xLength": 9,
+        "yLength": 9
+      },
+      {
+        "id": 21,
+        "oldname": "icons.png",
+        "newname": "experience_bar_background.png",
+        "x": 0,
+        "y": 64,
+        "xLength": 182,
+        "yLength": 5
+      },
+      {
+        "id": 22,
+        "oldname": "icons.png",
+        "newname": "experience_bar_progress.png",
+        "x": 0,
+        "y": 69,
+        "xLength": 182,
+        "yLength": 5
+      }
+    ]
+  }
+}

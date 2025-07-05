@@ -1,0 +1,12 @@
+{
+  "rename": [
+    {
+      "old": "/assets/minecraft/textures/items",
+      "new": "/assets/minecraft/textures/item"
+    },
+    {
+      "old": "/assets/minecraft/textures/blocks",
+      "new": "/assets/minecraft/textures/block"
+    }
+  ]
+}

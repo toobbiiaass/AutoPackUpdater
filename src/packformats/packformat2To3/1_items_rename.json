@@ -1,0 +1,684 @@
+{
+  "rename": [
+        {
+          "old": "gold_boots.png",
+          "new": "golden_boots.png"
+        },
+        {
+          "old": "gold_leggings.png",
+          "new": "golden_leggings.png"
+        },
+        {
+          "old": "gold_chestplate.png",
+          "new": "golden_chestplate.png"
+        },
+        {
+          "old": "gold_helmet.png",
+          "new": "golden_helmet.png"
+        },
+        {
+          "old": "gold_axe.png",
+          "new": "golden_axe.png"
+        },
+        {
+          "old": "wood_axe.png",
+          "new": "wooden_axe.png"
+        },
+        {
+          "old": "book_enchanted.png",
+          "new": "enchanted_book.png"
+        },
+        {
+          "old": "book_normal.png",
+          "new": "book.png"
+        },
+        {
+          "old": "book_writable.png",
+          "new": "writable_book.png"
+        },
+        {
+          "old": "book_written.png",
+          "new": "written_book.png"
+        },
+        {
+          "old": "bow_standby.png",
+          "new": "bow.png"
+        },
+        {
+          "old": "bucket_empty.png",
+          "new": "bucket.png"
+        },
+        {
+          "old": "bucket_lava.png",
+          "new": "lava_bucket.png"
+        },
+        {
+          "old": "bucket_water.png",
+          "new": "water_bucket.png"
+        },
+        {
+          "old": "bucket_milk.png",
+          "new": "milk_bucket.png"
+        },
+        {
+          "old": "door_acacia.png",
+          "new": "acacia_door.png"
+        },
+        {
+          "old": "door_birch.png",
+          "new": "birch_door.png"
+        },
+        {
+          "old": "door_dark_oak.png",
+          "new": "dark_oak_door.png"
+        },
+        {
+          "old": "door_iron.png",
+          "new": "iron_door.png"
+        },
+        {
+          "old": "door_jungle.png",
+          "new": "jungle_door.png"
+        },
+        {
+          "old": "door_spruce.png",
+          "new": "spruce_door.png"
+        },
+        {
+          "old": "door_wood.png",
+          "new": "oak_door.png"
+        },
+        {
+          "old": "seeds_wheat.png",
+          "new": "wheat_seeds.png"
+        },
+        {
+          "old": "seeds_pumpkin.png",
+          "new": "pumpkin_seeds.png"
+        },
+        {
+          "old": "seeds_melon.png",
+          "new": "melon_seeds.png"
+        },
+        {
+          "old": "reeds.png",
+          "new": "sugar_cane.png"
+        },
+        {
+          "old": "apple_golden.png",
+          "new": "golden_apple.png"
+        },
+        {
+          "old": "beef_cooked.png",
+          "new": "cooked_beef.png"
+        },
+        {
+          "old": "beef_raw.png",
+          "new": "beef.png"
+        },
+        {
+          "old": "carrot_golden.png",
+          "new": "golden_carrot.png"
+        },
+        {
+          "old": "chicken_cooked.png",
+          "new": "cooked_chicken.png"
+        },
+        {
+          "old": "chicken_raw.png",
+          "new": "chicken.png"
+        },
+        {
+          "old": "fish_cod_cooked.png",
+          "new": "cooked_cod.png"
+        },
+        {
+          "old": "fish_cod_raw.png",
+          "new": "cod.png"
+        },
+        {
+          "old": "fish_salmon_cooked.png",
+          "new": "cooked_salmon.png"
+        },
+        {
+          "old": "fish_salmon_raw.png",
+          "new": "salmon.png"
+        },
+        {
+          "old": "melon.png",
+          "new": "melon_slice.png"
+        },
+        {
+          "old": "melon_speckled.png",
+          "new": "glistering_melon_slice.png"
+        },
+        {
+          "old": "mutton_cooked.png",
+          "new": "cooked_mutton.png"
+        },
+        {
+          "old": "mutton_raw.png",
+          "new": "mutton.png"
+        },
+        {
+          "old": "porkchop_cooked.png",
+          "new": "cooked_porkchop.png"
+        },
+        {
+          "old": "porkchop_raw.png",
+          "new": "porkchop.png"
+        },
+        {
+          "old": "potato_baked.png",
+          "new": "baked_potato.png"
+        },
+        {
+          "old": "potato_poisonous.png",
+          "new": "poisonous_potato.png"
+        },
+        {
+          "old": "rabbit_cooked.png",
+          "new": "cooked_rabbit.png"
+        },
+        {
+          "old": "rabbit_raw.png",
+          "new": "rabbit.png"
+        },
+        {
+          "old": "gold_hoe.png",
+          "new": "golden_hoe.png"
+        },
+        {
+          "old": "wood_hoe.png",
+          "new": "wooden_hoe.png"
+        },
+        {
+          "old": "fireball.png",
+          "new": "fire_charge.png"
+        },
+        {
+          "old": "fireworks.png",
+          "new": "firework_rocket.png"
+        },
+        {
+          "old": "fireworks_charge.png",
+          "new": "firework_star.png"
+        },
+        {
+          "old": "fireworks_charge_overlay.png",
+          "new": "firework_star_overlay.png"
+        },
+        {
+          "old": "spider_eye_fermented.png",
+          "new": "fermented_spider_eye.png"
+        },
+        {
+          "old": "dye_powder_blue.png",
+          "new": "lapis_lazuli.png"
+        },
+        {
+          "old": "fishing_rod_uncast.png",
+          "new": "fishing_rod.png"
+        },
+        {
+          "old": "gold_pickaxe.png",
+          "new": "golden_pickaxe.png"
+        },
+        {
+          "old": "wood_pickaxe.png",
+          "new": "wooden_pickaxe.png"
+        },
+        {
+          "old": "potion_bottle_drinkable.png",
+          "new": "potion.png"
+        },
+        {
+          "old": "potion_bottle_splash.png",
+          "new": "splash_potion.png"
+        },
+        {
+          "old": "potion_bottle_empty.png",
+          "new": "glass_bottle.png"
+        },
+        {
+          "old": "redstone_dust.png",
+          "new": "redstone.png"
+        },
+        {
+          "old": "minecart_chest.png",
+          "new": "chest_minecart.png"
+        },
+        {
+          "old": "minecart_command_block.png",
+          "new": "command_block_minecart.png"
+        },
+        {
+          "old": "minecart_furnace.png",
+          "new": "furnace_minecart.png"
+        },
+        {
+          "old": "minecart_hopper.png",
+          "new": "hopper_minecart.png"
+        },
+        {
+          "old": "minecart_normal.png",
+          "new": "minecart.png"
+        },
+        {
+          "old": "minecart_tnt.png",
+          "new": "tnt_minecart.png"
+        },
+        {
+          "old": "gold_sword.png",
+          "new": "golden_sword.png"
+        },
+        {
+          "old": "wood_sword.png",
+          "new": "wooden_sword.png"
+        },
+        {
+          "old": "wood_shovel.png",
+          "new": "wooden_shovel.png"
+        },
+        {
+          "old": "gold_shovel.png",
+          "new": "golden_shovel.png"
+        },
+        {
+          "old": "hardened_clay.png",
+          "new": "terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_black.png",
+          "new": "black_terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_blue.png",
+          "new": "blue_terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_brown.png",
+          "new": "brown_terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_cyan.png",
+          "new": "cyan_terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_gray.png",
+          "new": "gray_terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_green.png",
+          "new": "green_terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_light_blue.png",
+          "new": "light_blue_terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_lime.png",
+          "new": "lime_terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_magenta.png",
+          "new": "magenta_terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_orange.png",
+          "new": "orange_terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_pink.png",
+          "new": "pink_terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_purple.png",
+          "new": "purple_terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_red.png",
+          "new": "red_terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_white.png",
+          "new": "white_terracotta.png"
+        },
+        {
+          "old": "hardened_clay_stained_yellow.png",
+          "new": "yellow_terracotta.png"
+        },
+        {
+          "old": "web.png",
+          "new": "cobweb.png"
+        },
+        {
+          "old": "grass_side.png",
+          "new": "grass_block_side.png"
+        },
+        {
+          "old": "glass_black.png",
+          "new": "black_stained_glass.png"
+        },
+        {
+          "old": "glass_blue.png",
+          "new": "blue_stained_glass.png"
+        },
+        {
+          "old": "glass_brown.png",
+          "new": "brown_stained_glass.png"
+        },
+        {
+          "old": "glass_cyan.png",
+          "new": "cyan_stained_glass.png"
+        },
+        {
+          "old": "glass_gray.png",
+          "new": "gray_stained_glass.png"
+        },
+        {
+          "old": "glass_green.png",
+          "new": "green_stained_glass.png"
+        },
+        {
+          "old": "glass_light_blue.png",
+          "new": "light_blue_stained_glass.png"
+        },
+        {
+          "old": "glass_lime.png",
+          "new": "lime_stained_glass.png"
+        },
+        {
+          "old": "glass_magenta.png",
+          "new": "magenta_stained_glass.png"
+        },
+        {
+          "old": "glass_orange.png",
+          "new": "orange_stained_glass.png"
+        },
+        {
+          "old": "glass_pane_top_black.png",
+          "new": "black_stained_glass_pane_top.png"
+        },
+        {
+          "old": "glass_pane_top_blue.png",
+          "new": "blue_stained_glass_pane_top.png"
+        },
+        {
+          "old": "glass_pane_top_brown.png",
+          "new": "brown_stained_glass_pane_top.png"
+        },
+        {
+          "old": "glass_pane_top_cyan.png",
+          "new": "cyan_stained_glass_pane_top.png"
+        },
+        {
+          "old": "glass_pane_top_gray.png",
+          "new": "gray_stained_glass_pane_top.png"
+        },
+        {
+          "old": "glass_pane_top_green.png",
+          "new": "green_stained_glass_pane_top.png"
+        },
+        {
+          "old": "glass_pane_top_light_blue.png",
+          "new": "light_blue_stained_glass_pane_top.png"
+        },
+        {
+          "old": "glass_pane_top_lime.png",
+          "new": "lime_stained_glass_pane_top.png"
+        },
+        {
+          "old": "glass_pane_top_magenta.png",
+          "new": "magenta_stained_glass_pane_top.png"
+        },
+        {
+          "old": "glass_pane_top_orange.png",
+          "new": "orange_stained_glass_pane_top.png"
+        },
+        {
+          "old": "glass_pane_top_pink.png",
+          "new": "pink_stained_glass_pane_top.png"
+        },
+        {
+          "old": "glass_pane_top_purple.png",
+          "new": "purple_stained_glass_pane_top.png"
+        },
+        {
+          "old": "glass_pane_top_red.png",
+          "new": "red_stained_glass_pane_top.png"
+        },
+        {
+          "old": "glass_pane_top_yellow.png",
+          "new": "yellow_stained_glass_pane_top.png"
+        },
+        {
+          "old": "glass_pink.png",
+          "new": "pink_stained_glass.png"
+        },
+        {
+          "old": "glass_purple.png",
+          "new": "purple_stained_glass.png"
+        },
+        {
+          "old": "glass_red.png",
+          "new": "red_stained_glass.png"
+        },
+        {
+          "old": "glass_white.png",
+          "new": "white_stained_glass.png"
+        },
+        {
+          "old": "glass_yellow.png",
+          "new": "yellow_stained_glass.png"
+        },
+        {
+          "old": "grass_top.png",
+          "new": "grass_block_top.png"
+        },
+        {
+          "old": "quartz_ore.png",
+          "new": "nether_quartz_ore.png"
+        },
+        {
+          "old": "planks_acacia.png",
+          "new": "acacia_planks.png"
+        },
+        {
+          "old": "planks_big_oak.png",
+          "new": "dark_oak_planks.png"
+        },
+        {
+          "old": "planks_birch.png",
+          "new": "birch_planks.png"
+        },
+        {
+          "old": "planks_jungle.png",
+          "new": "jungle_planks.png"
+        },
+        {
+          "old": "planks_oak.png",
+          "new": "oak_planks.png"
+        },
+        {
+          "old": "planks_spruce.png",
+          "new": "spruce_planks.png"
+        },
+        {
+          "old": "log_acacia.png",
+          "new": "acacia_log.png"
+        },
+        {
+          "old": "log_acacia_top.png",
+          "new": "acacia_log_top.png"
+        },
+        {
+          "old": "log_big_oak.png",
+          "new": "dark_oak_log.png"
+        },
+        {
+          "old": "log_big_oak_top.png",
+          "new": "dark_oak_log_top.png"
+        },
+        {
+          "old": "log_birch.png",
+          "new": "birch_log.png"
+        },
+        {
+          "old": "log_birch_top.png",
+          "new": "birch_log_top.png"
+        },
+        {
+          "old": "log_jungle.png",
+          "new": "jungle_log.png"
+        },
+        {
+          "old": "log_jungle_top.png",
+          "new": "jungle_log_top.png"
+        },
+        {
+          "old": "log_oak.png",
+          "new": "oak_log.png"
+        },
+        {
+          "old": "log_oak_top.png",
+          "new": "oak_log_top.png"
+        },
+        {
+          "old": "log_spruce.png",
+          "new": "spruce_log.png"
+        },
+        {
+          "old": "log_spruce_top.png",
+          "new": "spruce_log_top.png"
+        },
+        {
+          "old": "leaves_acacia.png",
+          "new": "acacia_leaves.png"
+        },
+        {
+          "old": "leaves_big_oak.png",
+          "new": "dark_oak_leaves.png"
+        },
+        {
+          "old": "leaves_birch.png",
+          "new": "birch_leaves.png"
+        },
+        {
+          "old": "leaves_jungle.png",
+          "new": "jungle_leaves.png"
+        },
+        {
+          "old": "leaves_oak.png",
+          "new": "oak_leaves.png"
+        },
+        {
+          "old": "leaves_spruce.png",
+          "new": "spruce_leaves.png"
+        },
+        {
+          "old": "wool_colored_black.png",
+          "new": "black_wool.png"
+        },
+        {
+          "old": "wool_colored_blue.png",
+          "new": "blue_wool.png"
+        },
+        {
+          "old": "wool_colored_brown.png",
+          "new": "brown_wool.png"
+        },
+        {
+          "old": "wool_colored_cyan.png",
+          "new": "cyan_wool.png"
+        },
+        {
+          "old": "wool_colored_gray.png",
+          "new": "gray_wool.png"
+        },
+        {
+          "old": "wool_colored_green.png",
+          "new": "green_wool.png"
+        },
+        {
+          "old": "wool_colored_light_blue.png",
+          "new": "light_blue_wool.png"
+        },
+        {
+          "old": "wool_colored_lime.png",
+          "new": "lime_wool.png"
+        },
+        {
+          "old": "wool_colored_magenta.png",
+          "new": "magenta_wool.png"
+        },
+        {
+          "old": "wool_colored_orange.png",
+          "new": "orange_wool.png"
+        },
+        {
+          "old": "wool_colored_pink.png",
+          "new": "pink_wool.png"
+        },
+        {
+          "old": "wool_colored_purple.png",
+          "new": "purple_wool.png"
+        },
+        {
+          "old": "wool_colored_red.png",
+          "new": "red_wool.png"
+        },
+        {
+          "old": "wool_colored_silver.png",
+          "new": "light_gray_wool.png"
+        },
+        {
+          "old": "wool_colored_white.png",
+          "new": "white_wool.png"
+        },
+        {
+          "old": "wool_colored_yellow.png",
+          "new": "yellow_wool.png"
+        },
+        {
+          "old": "anvil_base.png",
+          "new": "anvil.png"
+        },
+        {
+          "old": "anvil_top_damaged_0.png",
+          "new": "anvil_top.png"
+        },
+        {
+          "old": "anvil_top_damaged_1.png",
+          "new": "chipped_anvil_top.png"
+        },
+        {
+          "old": "anvil_top_damaged_2.png",
+          "new": "damaged_anvil_top.png"
+        },
+        {
+          "old": "cobblestone_mossy.png",
+          "new": "mossy_cobblestone.png"
+        },
+        {
+          "old": "stonebrick_mossy.png",
+          "new": "mossy_stone_bricks.png"
+        },
+        {
+          "old": "brick.png",
+          "new": "bricks.png"
+        },
+        {
+          "old": "nether_brick.png",
+          "new": "nether_bricks.png"
+        },
+        {
+          "old": "enchanted_item_glint.png",
+          "new": "enchanted_glint_item.png"
+        },
+        {
+          "old": "hardened_clay_stained_black.png",
+          "new": "black_terracotta.png"
+        }
+  ]
+}

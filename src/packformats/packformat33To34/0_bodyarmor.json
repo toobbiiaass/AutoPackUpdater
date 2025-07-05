@@ -1,0 +1,28 @@
+{
+  "UpperBodyArmor": {
+    "oldPath": "/assets/minecraft/textures/models/armor",
+    "newPath": "/assets/minecraft/textures/entity/equipment/humanoid",
+    "files": [
+      { "id": 1, "oldname": "chainmail_layer_1.png", "newname": "chainmail.png" },
+      { "id": 2, "oldname": "diamond_layer_1.png", "newname": "diamond.png" },
+      { "id": 3, "oldname": "gold_layer_1.png", "newname": "gold.png" },
+      { "id": 4, "oldname": "iron_layer_1.png", "newname": "iron.png" },
+      { "id": 5, "oldname": "leather_layer_1.png", "newname": "leather.png" },
+      { "id": 6, "oldname": "leather_layer_1_overlay.png", "newname": "leather_overlay.png" },
+      { "id": 7, "oldname": "netherite_layer_1.png", "newname": "netherite.png" }
+    ]
+  },
+  "UnderBodyArmor": {
+    "oldPath": "/assets/minecraft/textures/models/armor",
+    "newPath": "/assets/minecraft/textures/entity/equipment/humanoid_leggings",
+    "files": [
+      { "id": 1, "oldname": "chainmail_layer_2.png", "newname": "chainmail.png" },
+      { "id": 2, "oldname": "diamond_layer_2.png", "newname": "diamond.png" },
+      { "id": 3, "oldname": "gold_layer_2.png", "newname": "gold.png" },
+      { "id": 4, "oldname": "iron_layer_2.png", "newname": "iron.png" },
+      { "id": 5, "oldname": "leather_layer_2.png", "newname": "leather.png" },
+      { "id": 6, "oldname": "leather_layer_2_overlay.png", "newname": "leather_overlay.png" },
+      { "id": 7, "oldname": "netherite_layer_2.png", "newname": "netherite.png" }
+    ]
+  }
+}
