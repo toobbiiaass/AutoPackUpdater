@@ -243,7 +243,8 @@ public class Main {
                 }
 
                 if (createoffhand) {
-                    if (entryName.endsWith("widgets.png")) {
+                    if (entryName.endsWith("widgets.png")
+                    && !entryName.contains("spectator")) {
                         widgetsImage = File.createTempFile("widgets", ".png");
                         try (FileOutputStream fos = new FileOutputStream(widgetsImage)) {
                             fos.write(entryData);
