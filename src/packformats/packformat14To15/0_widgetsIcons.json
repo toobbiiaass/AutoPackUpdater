@@ -175,7 +175,7 @@
         "id": 17,
         "oldname": "icons.png",
         "newname": "absorbing_full.png;heart",
-        "x": 88,
+        "x": 160,
         "y": 0,
         "xLength": 9,
         "yLength": 9
@@ -184,7 +184,7 @@
         "id": 18,
         "oldname": "icons.png",
         "newname": "absorbing_half.png;heart",
-        "x": 97,
+        "x": 169,
         "y": 0,
         "xLength": 9,
         "yLength": 9

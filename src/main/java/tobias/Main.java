@@ -153,7 +153,7 @@ public class Main {
 
                 String entryName = entry.getName();
                 String newEntryName = entryName;
-                //System.out.println(entryName);
+                System.out.println(entryName);
 
                 //Rename folders
                 if(allFoldersToRename != null){
