@@ -30,31 +30,37 @@ public class Main {
         gui.setProgress(0);
 
         gui.DragAndDropGui(files -> {
-            for (File file : files) {
-                if (file.getName().toLowerCase().endsWith(".zip")) {
-                    new SwingWorker<Void, Integer>() {
-                        @Override
-                        protected Void doInBackground() {
+            new SwingWorker<Void, Integer>() {
+                @Override
+                protected Void doInBackground() {
+                    int totalFiles = files.size();
+                    int progressPerFile = 100 / totalFiles;
+                    int currentProgress = 1;
+
+                    gui.setProgress(currentProgress);
+
+                    for (File file : files) {
+
+                        if (file.getName().toLowerCase().endsWith(".zip")) {
                             String currentVersion = gui.getSelectedCurrentVersion();
                             String targetVersion = gui.getSelectedTargetVersion();
 
                             int currentFormat = VersionUtil.versionToPackFormat(currentVersion);
                             int targetFormat = VersionUtil.versionToPackFormat(targetVersion);
 
-                            gui.setProgress(10);
                             copyAndRenameZip(file, currentFormat, targetFormat, targetVersion);
-                            gui.setProgress(100);
-                            System.out.println("-------------------------------------------");
-                            System.out.println("|                   DONE                  |");
-                            System.out.println("-------------------------------------------");
-                            return null;
                         }
-                    }.execute();
-                } else {
-                    System.out.println("Not a ZIP file: " + file.getName());
+
+                        currentProgress += progressPerFile;
+                        gui.setProgress(Math.min(currentProgress, 100));
+                    }
+
+                    gui.setProgress(100);
+                    return null;
                 }
-            }
+            }.execute();
         });
+
     }
 
     private static void copyAndRenameZip(File originalZip, int currentFormatFromUser, int targetFormat, String targetVersionString) {

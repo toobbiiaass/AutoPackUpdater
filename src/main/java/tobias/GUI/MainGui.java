@@ -35,7 +35,6 @@ public class MainGui {
         frame.setAlwaysOnTop(true);
         frame.setLayout(new BorderLayout());
 
-        // Info-Bar oben
         JLabel infoLabel = new JLabel("ⓘ");
         infoLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
         infoLabel.setForeground(Color.BLUE);
@@ -53,13 +52,16 @@ public class MainGui {
                                 "• Updates the 'pack_format' so Minecraft can recognize the new version.\n" +
                                 "• Removes fake transparent pixels from items (helps with 3D appearance in high-res packs).\n" +
                                 "• From version 1.11+, it generates left and right offhand hotbars from the original one.\n" +
-                                "• If you're updating a 1.8.9 pack, it will also generate Netherite items.\n",
+                                "• If you're updating a 1.8.9 pack, it will also generate Netherite items.\n\n" +
+                                "→ You can also drag and drop multiple ZIP packs at once — they will be processed automatically.",
                         "What does this tool do?",
                         JOptionPane.INFORMATION_MESSAGE);
+
             }
         });
 
-
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.add(infoLabel, BorderLayout.WEST);
 
         frame.add(infoLabel, BorderLayout.NORTH);
 
@@ -148,4 +150,5 @@ public class MainGui {
             SwingUtilities.invokeLater(() -> progressBar.setValue(value));
         }
     }
+
 }
