@@ -106,6 +106,7 @@ public class Main {
 
             boolean needNethGen = false;
             boolean createoffhand = false;
+            boolean needNewInv = false;
 
             File widgetsImage = null;
             File iconsImage = null;
@@ -116,6 +117,7 @@ public class Main {
                 Path pathParticles = Paths.get("src", "packformats", "packformat1To2", "0_particles.json");
                 allParticleEntries = JsonUtil.loadParticles(pathParticles.toString());
                 needNethGen = true;
+                needNewInv = true;
 
 
             }
@@ -158,8 +160,9 @@ public class Main {
                 }
 
                 String entryName = entry.getName();
+
                 String newEntryName = entryName;
-                System.out.println(entryName);
+                //System.out.println(entryName);
 
                 //Rename folders
                 if(allFoldersToRename != null){
@@ -269,13 +272,36 @@ public class Main {
                         }
                         continue;
                     }
-
                 }
 
+                if (needNewInv
+                        && entryName.contains("container")
+                        && !entry.isDirectory()) {
+                    System.out.println("SKIPPING original file on container folder");
+                    continue;
+                }
                 writeZipEntryIfNotExists(zipOutput, alreadyWrittenPaths, newEntryName, entryData);
                 allZipEntries.put(entryName, entryData);
             }
 
+            if (needNewInv) {
+                Path pathInventory = Paths.get("src").resolve("images").resolve("inventory.png");
+                if (Files.exists(pathInventory)) {
+                    byte[] invData = Files.readAllBytes(pathInventory);
+
+                    String inventoryZipPath = Paths.get("assets", "minecraft", "textures", "gui", "container", "inventory.png")
+                            .toString().replace("\\", "/");
+
+                    System.out.println("Adding new inventory");
+                    zipOutput.putNextEntry(new ZipEntry(inventoryZipPath));
+                    zipOutput.write(invData);
+                    zipOutput.closeEntry();
+
+                    alreadyWrittenPaths.add(inventoryZipPath);
+                } else {
+                    System.err.println("New inventory.png not found: " + pathInventory.toAbsolutePath());
+                }
+            }
 
             if (createoffhand && allWidgetsIcons != null) {
                 if ((widgetsImage == null || !widgetsImage.exists()) && (iconsImage == null || !iconsImage.exists())) {
