@@ -679,6 +679,18 @@
         {
           "old": "hardened_clay_stained_black.png",
           "new": "black_terracotta.png"
+        },
+        {
+          "old": "sandstone_normal.png",
+          "new": "sandstone.png"
+        },
+        {
+          "old": "sandstone_carved.png",
+          "new": "chiseled_sandstone.png"
+        },
+        {
+          "old": "sandstone_smooth.png",
+          "new": "cut_sandstone.png"
         }
   ]
 }

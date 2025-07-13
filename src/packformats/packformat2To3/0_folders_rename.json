@@ -7,6 +7,10 @@
     {
       "old": "/assets/minecraft/textures/blocks",
       "new": "/assets/minecraft/textures/block"
+    },
+    {
+      "old": "/assets/minecraft/mcpatcher",
+      "new": "/assets/minecraft/optifine"
     }
   ]
 }
