@@ -265,7 +265,8 @@ public class Main {
                             && !entryName.contains("achievement")
                             && !entryName.contains("stats")
                             && !entryName.contains("map")
-                            && !entryName.contains("invitation")) {
+                            && !entryName.contains("invitation")
+                            && !entryName.contains("crosshair")) {
                         iconsImage = File.createTempFile("icons", ".png");
                         try (FileOutputStream fos = new FileOutputStream(iconsImage)) {
                             fos.write(entryData);
