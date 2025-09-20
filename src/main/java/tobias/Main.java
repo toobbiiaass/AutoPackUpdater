@@ -164,6 +164,11 @@ public class Main {
                 String newEntryName = entryName;
                 //System.out.println(entryName);
 
+                if (entryName.contains("/font/")) { //bug that texturepack is not useable in 1.21.4
+                    System.out.println("Skipping: " + entryName);
+                    continue; // gehe zur nächsten ZipEntry
+                }
+
                 //Rename folders
                 if(allFoldersToRename != null){
                     for (RenameEntry e : allFoldersToRename) {
