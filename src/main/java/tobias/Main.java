@@ -162,10 +162,11 @@ public class Main {
                 String entryName = entry.getName();
 
                 String newEntryName = entryName;
-                //System.out.println(entryName);
-
                 if (entryName.contains("/font/")) { //bug that texturepack is not useable in 1.21.4
-                    System.out.println("Skipping: " + entryName);
+                    //deleting entire folder content
+                    if(entryName.endsWith("/font/")){
+                        System.out.println("removing font folder");
+                    }
                     continue; // gehe zur nächsten ZipEntry
                 }
 
@@ -177,6 +178,7 @@ public class Main {
                             newEntryName = renamed;
                             break;
                         }
+
                     }
                 }
 
@@ -286,8 +288,22 @@ public class Main {
                     System.out.println("SKIPPING original file on container folder");
                     continue;
                 }
-                writeZipEntryIfNotExists(zipOutput, alreadyWrittenPaths, newEntryName, entryData);
-                allZipEntries.put(entryName, entryData);
+                if (entryData.length > 0) {
+
+                    writeZipEntryIfNotExists(zipOutput, alreadyWrittenPaths, newEntryName, entryData);
+                    allZipEntries.put(entryName, entryData);
+                }else{
+                    String[] parts = entryName.split("/");
+                    if (parts.length > 0) {
+                        String foldername = parts[parts.length - 1];
+                        if (foldername.isEmpty() && parts.length > 1) {
+                            foldername = parts[parts.length - 2];
+                        }
+                        System.out.println("Removing empty folder: "+foldername);
+                    }
+
+                }
+
             }
 
             if (needNewInv) {
