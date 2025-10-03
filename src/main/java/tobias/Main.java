@@ -1,27 +1,44 @@
 package tobias;
 
-import com.google.gson.*;
-import tobias.GUI.MainGui;
-import tobias.Objects.*;
-import tobias.Utils.JsonUtil;
-import tobias.Utils.VersionUtil;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
+
+import javax.imageio.ImageIO;
+import javax.swing.SwingWorker;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import tobias.GUI.MainGui;
+import tobias.Objects.ArmorCategory;
+import tobias.Objects.ArmorFileEntry;
+import tobias.Objects.GuiSplitCategory;
+import tobias.Objects.ParticleEntry;
+import tobias.Objects.RenameEntry;
+import tobias.Utils.JsonUtil;
+import tobias.Utils.VersionUtil;
 
 public class Main {
 
@@ -641,46 +658,54 @@ public class Main {
 
         return entryData;
     }
-
+    
     public static byte[] recolorToNetherite(byte[] imageData) {
-        try (ByteArrayInputStream bis = new ByteArrayInputStream(imageData)) {
-            BufferedImage image = ImageIO.read(bis);
-            if (image == null) return imageData;
+    try (ByteArrayInputStream bis = new ByteArrayInputStream(imageData)) {
+        BufferedImage image = ImageIO.read(bis);
+        if (image == null)
+            return imageData;
 
-            int width = image.getWidth();
-            int height = image.getHeight();
+        int width = image.getWidth();
+        int height = image.getHeight();
 
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    int rgba = image.getRGB(x, y);
-                    Color original = new Color(rgba, true);
-                    int alpha = original.getAlpha();
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int argb = image.getRGB(x, y);
+                int alpha = (argb >> 24) & 0xff;
+                int red = (argb >> 16) & 0xff;
+                int green = (argb >> 8) & 0xff;
+                int blue = argb & 0xff;
+                
+                if (alpha > 0) {
+                    float[] hsb = Color.RGBtoHSB(red, green, blue, null);
 
-                    if (alpha == 255) {
-                        double L = 0.4126 * original.getRed() + 0.7152 * original.getGreen() + 0.0722 * original.getBlue();
+                    float netheriteHue = 0.08f;
+                    float netheriteSaturation = 0.18f;
+                    
+                    float darkness = 0.01f; // 0.01 (black) - 0.1 (dark)
+                    float original = 0.02f; // 0.01 (darker) - 0.1 (orignal)
+                    float netheriteBrightness = darkness + hsb[2]* original;
 
-                        int newR = (int) (71 * L / 255);
-                        int newG = (int) (58 * L / 255);
-                        int newB = (int) (65 * L / 255);
+                    int newRgb = Color.HSBtoRGB(netheriteHue, netheriteSaturation, netheriteBrightness);
+                    int newR = (newRgb >> 16) & 0xff;
+                    int newG = (newRgb >> 8) & 0xff;
+                    int newB = newRgb & 0xff;
 
-                        Color netherite = new Color(clamp(newR), clamp(newG), clamp(newB), alpha);
-                        image.setRGB(x, y, netherite.getRGB());
-                    }
+                    int newArgb = (alpha << 24) | (newR << 16) | (newG << 8) | newB;
+                    image.setRGB(x, y, newArgb);
                 }
             }
-
-            ByteArrayOutputStream tempOut = new ByteArrayOutputStream();
-            ImageIO.write(image, "png", tempOut);
-            return tempOut.toByteArray();
-
-        } catch (IOException e) {
-            System.err.println("Netherite recoloring error: " + e.getMessage());
-            return imageData;
         }
+
+        ByteArrayOutputStream tempOut = new ByteArrayOutputStream();
+        ImageIO.write(image, "png", tempOut);
+        return tempOut.toByteArray();
+
+    } catch (IOException e) {
+        System.err.println("Netherite recoloring error: " + e.getMessage());
+        return imageData;
     }
-    private static int clamp(int value) {
-        return Math.max(0, Math.min(255, value));
-    }
+}
 
     public static void OffHandCreator(File hotbarImageFile, Path safeFile) {
         int toCutFromHotbar = 11;
