@@ -65,7 +65,7 @@ public class Main {
                             int currentFormat = VersionUtil.versionToPackFormat(currentVersion);
                             int targetFormat = VersionUtil.versionToPackFormat(targetVersion);
 
-                            copyAndRenameZip(file, currentFormat, targetFormat, targetVersion);
+                            copyAndRenameZip(file, currentFormat, targetFormat, targetVersion, currentVersion, targetVersion);
                         }
 
                         currentProgress += progressPerFile;
@@ -80,7 +80,7 @@ public class Main {
 
     }
 
-    private static void copyAndRenameZip(File originalZip, int currentFormatFromUser, int targetFormat, String targetVersionString) {
+    private static void copyAndRenameZip(File originalZip, int currentFormatFromUser, int targetFormat, String targetVersionString, String currentVersionString, String targetVersionString2) {
         String originalName = originalZip.getName();
         String baseName = originalName.substring(0, originalName.lastIndexOf(".zip"));
         File updatedZip = new File(originalZip.getParent(), baseName + "_v" + targetVersionString + ".zip");
@@ -428,6 +428,8 @@ public class Main {
                     }
                 }
             }
+            // Am Ende vor zipOutput.close():
+            addPackCreditsToZip(zipOutput, currentVersionString, targetVersionString2);
             zipOutput.close();
 
             if (needsUpgrade) {
@@ -765,5 +767,16 @@ public class Main {
 
         g.dispose();
         return flipped;
+    }
+
+    // Neue Methode zum Hinzufügen der Credits-Datei
+    private static void addPackCreditsToZip(ZipOutputStream zipOutput, String currentVersion, String targetVersion) throws IOException {
+        String creditsContent = "Pack updatet from version " + currentVersion + " to version " + targetVersion + " by vuacy PackUpdater\n"
+            + "Discord: https://discord.com/invite/ExGSqUT6qk\n"
+            + "vuacy@youtube\n";
+        ZipEntry creditsEntry = new ZipEntry("pack.credits.txt");
+        zipOutput.putNextEntry(creditsEntry);
+        zipOutput.write(creditsContent.getBytes(StandardCharsets.UTF_8));
+        zipOutput.closeEntry();
     }
 }
