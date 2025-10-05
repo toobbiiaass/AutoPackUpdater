@@ -310,6 +310,16 @@ public class Main {
 
                     writeZipEntryIfNotExists(zipOutput, alreadyWrittenPaths, newEntryName, entryData);
                     allZipEntries.put(entryName, entryData);
+
+                    if (newEntryName.contains("fire_") && newEntryName.endsWith(".png")) {
+                        String mcmetaName = newEntryName + ".mcmeta";
+                        if (!alreadyWrittenPaths.contains(mcmetaName)) {
+                            boolean exists = allZipEntries.containsKey(mcmetaName);
+                            if (!exists) {
+                                writeFireMcmeta(zipOutput, mcmetaName, entryData, alreadyWrittenPaths);
+                            }
+                        }
+                    }
                 }else{
                     String[] parts = entryName.split("/");
                     if (parts.length > 0) {
@@ -428,10 +438,23 @@ public class Main {
                     }
                 }
             }
-            // Am Ende vor zipOutput.close():
+            Map<String, byte[]> firePngs = new HashMap<>();
+            Set<String> fireMcmetas = new HashSet<>();
+            for (Map.Entry<String, byte[]> entryFire : allZipEntries.entrySet()) {
+                String name = entryFire.getKey();
+                if (name.startsWith("fire_") && name.endsWith(".png")) {
+                    firePngs.put(name, entryFire.getValue());
+                }
+                if (name.startsWith("fire_") && name.endsWith(".mcmeta")) {
+                    fireMcmetas.add(name);
+                }
+            }
+            ensureFireMcmetaFiles(zipOutput, firePngs, fireMcmetas, alreadyWrittenPaths);
+
             addPackCreditsToZip(zipOutput, currentVersionString, targetVersionString2);
             zipOutput.close();
 
+            System.err.println("Pack done!");
             if (needsUpgrade) {
                 try (FileOutputStream fos = new FileOutputStream(updatedZip)) {
                     zipBuffer.writeTo(fos);
@@ -769,7 +792,6 @@ public class Main {
         return flipped;
     }
 
-    // Neue Methode zum Hinzufügen der Credits-Datei
     private static void addPackCreditsToZip(ZipOutputStream zipOutput, String currentVersion, String targetVersion) throws IOException {
         String creditsContent = "Pack updatet from version " + currentVersion + " to version " + targetVersion + " by vuacy PackUpdater\n"
             + "Discord: https://discord.com/invite/ExGSqUT6qk\n"
@@ -778,5 +800,51 @@ public class Main {
         zipOutput.putNextEntry(creditsEntry);
         zipOutput.write(creditsContent.getBytes(StandardCharsets.UTF_8));
         zipOutput.closeEntry();
+    }
+
+    private static void ensureFireMcmetaFiles(ZipOutputStream zipOutput, Map<String, byte[]> firePngs, Set<String> fireMcmetas, Set<String> alreadyWrittenPaths) throws IOException {
+        for (Map.Entry<String, byte[]> entry : firePngs.entrySet()) {
+            String pngName = entry.getKey();
+            String mcmetaName = pngName + ".mcmeta";
+            if (fireMcmetas.contains(mcmetaName) || alreadyWrittenPaths.contains(mcmetaName)) {
+                continue;
+            }
+            writeFireMcmeta(zipOutput, mcmetaName, entry.getValue(), alreadyWrittenPaths);
+        }
+    }
+
+    private static void writeFireMcmeta(ZipOutputStream zipOutput, String mcmetaName, byte[] pngData, Set<String> alreadyWrittenPaths) {
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(pngData)) {
+            BufferedImage img = ImageIO.read(bis);
+            if (img == null) {
+                System.err.println("Konnte PNG nicht lesen: " + mcmetaName);
+                return;
+            }
+            int width = img.getWidth();
+            int height = img.getHeight();
+            int frames = (width > 0) ? height / width : 1;
+            if (frames < 1) frames = 1;
+
+            StringBuilder framesStr = new StringBuilder();
+            framesStr.append("[\n");
+            for (int i = 0; i < frames; i++) {
+                framesStr.append("      ").append(i);
+                if (i < frames - 1) framesStr.append(",\n");
+            }
+            framesStr.append("\n    ]");
+
+            String mcmetaContent = "{\n  \"animation\": {\n    \"frames\": " + framesStr.toString() + "\n  }\n}";
+            try {
+                zipOutput.putNextEntry(new ZipEntry(mcmetaName));
+                zipOutput.write(mcmetaContent.getBytes(StandardCharsets.UTF_8));
+                zipOutput.closeEntry();
+                alreadyWrittenPaths.add(mcmetaName);
+                System.out.println("mcmeta created " + mcmetaName + " (frames: " + frames + ")");
+            } catch (IOException e) {
+                System.err.println("Error writing mcmeta: " + mcmetaName + " - " + e.getMessage());
+            }
+        } catch (Exception ex) {
+            System.err.println("Error PNG/mcmeta: " + mcmetaName + " - " + ex.getMessage());
+        }
     }
 }
