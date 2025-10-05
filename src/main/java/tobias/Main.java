@@ -106,8 +106,9 @@ public class Main {
                     .collect(Collectors.toList());
 
             for (String folder : foldersToEnsure) {
-                if (!existingFolders.contains(folder)) {
-                    zipOutput.putNextEntry(new ZipEntry(folder));
+                String folderEntry = folder.endsWith("/") ? folder : folder + "/";
+                if (!existingFolders.contains(folderEntry)) {
+                    zipOutput.putNextEntry(new ZipEntry(folderEntry));
                     zipOutput.closeEntry();
                 }
             }
