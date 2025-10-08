@@ -1,16 +1,35 @@
 package tobias.GUI;
-import tobias.Utils.VersionUtil;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.datatransfer.DataFlavor;
-import java.awt.dnd.*;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetAdapter;
+import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JSlider;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
+import tobias.Utils.VersionUtil;
 
 public class MainGui {
     public interface FileDropListener {
@@ -20,6 +39,7 @@ public class MainGui {
     private JProgressBar progressBar;
     private JComboBox<String> currentVersionSelector;
     private JComboBox<String> targetVersionSelector;
+    private JSlider darknessSlider; // Add this field
     String[] versionOptions = {
             "1.8.9", "1.9", "1.11", "1.13", "1.15",
             "1.16.2", "1.17", "1.18", "1.19", "1.19.3",
@@ -93,9 +113,22 @@ public class MainGui {
         progressBar = new JProgressBar(0, 100);
         progressBar.setStringPainted(true);
 
+        // Netherite darkness slider
+        JPanel darknessPanel = new JPanel(new BorderLayout());
+        JLabel darknessLabel = new JLabel("Netherite darkness: (1 = darkest, 10 = brightest)");
+        darknessSlider = new JSlider(1, 10, 3); // 0.01 to 0.10, default 0.03
+        darknessSlider.setMajorTickSpacing(1);
+        darknessSlider.setPaintTicks(true);
+        darknessSlider.setPaintLabels(true);
+        darknessSlider.setLabelTable(darknessSlider.createStandardLabels(1));
+        darknessPanel.add(darknessLabel, BorderLayout.WEST);
+        darknessPanel.add(darknessSlider, BorderLayout.CENTER);
+
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
         bottomPanel.add(versionPanel);
+        bottomPanel.add(Box.createVerticalStrut(10));
+        bottomPanel.add(darknessPanel);
         bottomPanel.add(Box.createVerticalStrut(10));
         bottomPanel.add(progressBar);
 
@@ -149,6 +182,9 @@ public class MainGui {
         if (progressBar != null) {
             SwingUtilities.invokeLater(() -> progressBar.setValue(value));
         }
+    }
+    public float getNetheriteDarkness() {
+        return darknessSlider != null ? darknessSlider.getValue() / 100.0f : 0.03f;
     }
 
 }

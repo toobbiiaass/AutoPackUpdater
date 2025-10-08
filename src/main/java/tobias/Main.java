@@ -56,6 +56,8 @@ public class Main {
 
                     gui.setProgress(currentProgress);
 
+                    float netheriteDarkness = gui.getNetheriteDarkness();
+
                     for (File file : files) {
 
                         if (file.getName().toLowerCase().endsWith(".zip")) {
@@ -65,7 +67,7 @@ public class Main {
                             int currentFormat = VersionUtil.versionToPackFormat(currentVersion);
                             int targetFormat = VersionUtil.versionToPackFormat(targetVersion);
 
-                            copyAndRenameZip(file, currentFormat, targetFormat, targetVersion, currentVersion, targetVersion);
+                            copyAndRenameZip(file, currentFormat, targetFormat, targetVersion, currentVersion, targetVersion, netheriteDarkness);
                         }
 
                         currentProgress += progressPerFile;
@@ -80,7 +82,7 @@ public class Main {
 
     }
 
-    private static void copyAndRenameZip(File originalZip, int currentFormatFromUser, int targetFormat, String targetVersionString, String currentVersionString, String targetVersionString2) {
+    private static void copyAndRenameZip(File originalZip, int currentFormatFromUser, int targetFormat, String targetVersionString, String currentVersionString, String targetVersionString2, float netheriteDarkness) {
         String originalName = originalZip.getName();
         String baseName = originalName.substring(0, originalName.lastIndexOf(".zip"));
         File updatedZip = new File(originalZip.getParent(), baseName + "_v" + targetVersionString + ".zip");
@@ -253,7 +255,7 @@ public class Main {
                                 entryName.contains("/textures/entity/") || entryName.contains("/textures/models/"))) {
                     System.out.println("Generating netherite piece");
 
-                    byte[] netheriteImageData = recolorToNetherite(entryData);
+                    byte[] netheriteImageData = recolorToNetherite(entryData, netheriteDarkness);
 
                     String fileName = entryName.substring(entryName.lastIndexOf('/') + 1);
                     String netheriteFileName = fileName.replace("diamond", "netherite");
@@ -685,53 +687,53 @@ public class Main {
         return entryData;
     }
     
-    public static byte[] recolorToNetherite(byte[] imageData) {
-    try (ByteArrayInputStream bis = new ByteArrayInputStream(imageData)) {
-        BufferedImage image = ImageIO.read(bis);
-        if (image == null)
-            return imageData;
+    public static byte[] recolorToNetherite(byte[] imageData, float darkness) {
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(imageData)) {
+            BufferedImage image = ImageIO.read(bis);
+            if (image == null)
+                return imageData;
 
-        int width = image.getWidth();
-        int height = image.getHeight();
+            int width = image.getWidth();
+            int height = image.getHeight();
 
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                int argb = image.getRGB(x, y);
-                int alpha = (argb >> 24) & 0xff;
-                int red = (argb >> 16) & 0xff;
-                int green = (argb >> 8) & 0xff;
-                int blue = argb & 0xff;
-                
-                if (alpha > 0) {
-                    float[] hsb = Color.RGBtoHSB(red, green, blue, null);
-
-                    float netheriteHue = 0.08f;
-                    float netheriteSaturation = 0.18f;
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    int argb = image.getRGB(x, y);
+                    int alpha = (argb >> 24) & 0xff;
+                    int red = (argb >> 16) & 0xff;
+                    int green = (argb >> 8) & 0xff;
+                    int blue = argb & 0xff;
                     
-                    float darkness = 0.01f; // 0.01 (black) - 0.1 (dark)
-                    float original = 0.02f; // 0.01 (darker) - 0.1 (orignal)
-                    float netheriteBrightness = darkness + hsb[2]* original;
+                    if (alpha > 0) {
+                        float[] hsb = Color.RGBtoHSB(red, green, blue, null);
 
-                    int newRgb = Color.HSBtoRGB(netheriteHue, netheriteSaturation, netheriteBrightness);
-                    int newR = (newRgb >> 16) & 0xff;
-                    int newG = (newRgb >> 8) & 0xff;
-                    int newB = newRgb & 0xff;
+                        float netheriteHue = 0.08f;
+                        float netheriteSaturation = 0.18f;
+                        
+                        // float darkness = 0.01f; // 0.01 (black) - 0.1 (dark)
+                        float original = 0.02f; // 0.01 (darker) - 0.1 (orignal)
+                        float netheriteBrightness = darkness + hsb[2]* original;
 
-                    int newArgb = (alpha << 24) | (newR << 16) | (newG << 8) | newB;
-                    image.setRGB(x, y, newArgb);
+                        int newRgb = Color.HSBtoRGB(netheriteHue, netheriteSaturation, netheriteBrightness);
+                        int newR = (newRgb >> 16) & 0xff;
+                        int newG = (newRgb >> 8) & 0xff;
+                        int newB = newRgb & 0xff;
+
+                        int newArgb = (alpha << 24) | (newR << 16) | (newG << 8) | newB;
+                        image.setRGB(x, y, newArgb);
+                    }
                 }
             }
+
+            ByteArrayOutputStream tempOut = new ByteArrayOutputStream();
+            ImageIO.write(image, "png", tempOut);
+            return tempOut.toByteArray();
+
+        } catch (IOException e) {
+            System.err.println("Netherite recoloring error: " + e.getMessage());
+            return imageData;
         }
-
-        ByteArrayOutputStream tempOut = new ByteArrayOutputStream();
-        ImageIO.write(image, "png", tempOut);
-        return tempOut.toByteArray();
-
-    } catch (IOException e) {
-        System.err.println("Netherite recoloring error: " + e.getMessage());
-        return imageData;
     }
-}
 
     public static void OffHandCreator(File hotbarImageFile, Path safeFile) {
         int toCutFromHotbar = 11;
