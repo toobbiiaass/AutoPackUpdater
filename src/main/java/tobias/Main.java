@@ -116,12 +116,14 @@ public class Main {
             }
             List<RenameEntry> allFoldersToRename = null;
             List<RenameEntry> allItemsToRename = null;
+
             List<ParticleEntry> allParticleEntries = null;
             Map<String, GuiSplitCategory> allWidgetsIcons = null;
             Map<String, ArmorCategory> allArmors = null;
             Set<String> alreadyWrittenPaths = new HashSet<>();
 
             Map<String, byte[]> allZipEntries = new HashMap<>();
+            Set<String> allZipFolders = new HashSet<>();
 
 
             boolean needNethGen = false;
@@ -204,10 +206,9 @@ public class Main {
 
                 // Rename items
                 if (allItemsToRename != null) {
+                    String oldName = newEntryName;
                     newEntryName = renameItemNameInPath(newEntryName, allItemsToRename);
                 }
-
-
 
                 if(entryName.contains("particle") && entryName.contains("particles")){ //gen particles
                     if (entryName.endsWith("particles.png") && allParticleEntries != null) {
@@ -456,7 +457,9 @@ public class Main {
             addPackCreditsToZip(zipOutput, currentVersionString, targetVersionString2);
             zipOutput.close();
 
-            System.err.println("Pack done!");
+            System.out.println("+----------+");
+            System.out.println("|Pack done!|");
+            System.out.println("+----------+");
             if (needsUpgrade) {
                 try (FileOutputStream fos = new FileOutputStream(updatedZip)) {
                     zipBuffer.writeTo(fos);
@@ -686,7 +689,7 @@ public class Main {
 
         return entryData;
     }
-    
+
     public static byte[] recolorToNetherite(byte[] imageData, float darkness) {
         try (ByteArrayInputStream bis = new ByteArrayInputStream(imageData)) {
             BufferedImage image = ImageIO.read(bis);
@@ -696,32 +699,39 @@ public class Main {
             int width = image.getWidth();
             int height = image.getHeight();
 
+            darkness = Math.max(0.01f, Math.min(0.10f, darkness));
+
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
                     int argb = image.getRGB(x, y);
                     int alpha = (argb >> 24) & 0xff;
+                    if (alpha == 0) continue;
+
                     int red = (argb >> 16) & 0xff;
                     int green = (argb >> 8) & 0xff;
                     int blue = argb & 0xff;
-                    
-                    if (alpha > 0) {
-                        float[] hsb = Color.RGBtoHSB(red, green, blue, null);
 
-                        float netheriteHue = 0.08f;
-                        float netheriteSaturation = 0.18f;
-                        
-                        // float darkness = 0.01f; // 0.01 (black) - 0.1 (dark)
-                        float original = 0.02f; // 0.01 (darker) - 0.1 (orignal)
-                        float netheriteBrightness = darkness + hsb[2]* original;
+                    float[] hsb = Color.RGBtoHSB(red, green, blue, null);
+                    float originalBrightness = hsb[2];
 
-                        int newRgb = Color.HSBtoRGB(netheriteHue, netheriteSaturation, netheriteBrightness);
-                        int newR = (newRgb >> 16) & 0xff;
-                        int newG = (newRgb >> 8) & 0xff;
-                        int newB = newRgb & 0xff;
+                    float netheriteHue = 0.76f;
+                    float netheriteSaturation = 0.35f;
 
-                        int newArgb = (alpha << 24) | (newR << 16) | (newG << 8) | newB;
-                        image.setRGB(x, y, newArgb);
-                    }
+                    // Dynamische Helligkeit abhängig von darkness (0.01 - 0.10)
+                    // niedriges darkness => dunkler, höheres => heller
+                    float minBrightness = darkness * 0.5f;
+                    float maxBrightness = 0.2f + (darkness * 3.0f);
+                    float brightness = minBrightness + originalBrightness * (maxBrightness - minBrightness);
+
+                    brightness = (float) Math.pow(brightness, 0.9);
+
+                    float randomFactor = 0.97f + (float)Math.random() * 0.06f;
+                    brightness *= randomFactor;
+                    brightness = Math.min(1f, Math.max(0f, brightness));
+
+                    int newRgb = Color.HSBtoRGB(netheriteHue, netheriteSaturation, brightness);
+                    int newArgb = (alpha << 24) | (newRgb & 0xFFFFFF);
+                    image.setRGB(x, y, newArgb);
                 }
             }
 
