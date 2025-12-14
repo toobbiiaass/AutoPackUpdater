@@ -1,4 +1,4 @@
-# Pack Updater
+# Pack Updater!
 
 **This tool updates old Minecraft resource packs to a selected newer version.**
 
