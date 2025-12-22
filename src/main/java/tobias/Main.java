@@ -4,16 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -135,36 +131,29 @@ public class Main {
 
 
             if (targetFormat > 1 && currentFormatFromUser <= 1) {
-                //1.8 in 1.9
-                Path pathParticles = Paths.get("src","main","resources", "packformats", "packformat1To2", "0_particles.json");
-                allParticleEntries = JsonUtil.loadParticles(pathParticles.toString());
+                String pathParticles = getResourcePath("packformats", "packformat1To2", "0_particles.json");
+                allParticleEntries = JsonUtil.loadParticles(pathParticles);
                 needNethGen = true;
                 needNewInv = true;
-
-
             }
+
             if (targetFormat > 3 && currentFormatFromUser <= 3) {
-                //1.11 in 1.13
-                Path path = Paths.get("src","main", "resources", "packformats", "packformat2To3", "0_folders_rename.json");
-                Path pathItems = Paths.get("src","main", "resources", "packformats", "packformat2To3", "1_items_rename.json");
+                String path = getResourcePath("packformats", "packformat2To3", "0_folders_rename.json");
+                String pathItems = getResourcePath("packformats", "packformat2To3", "1_items_rename.json");
 
-                allFoldersToRename = JsonUtil.loadRenames(path.toString());
-                allItemsToRename = JsonUtil.loadRenames(pathItems.toString());
+                allFoldersToRename = JsonUtil.loadRenames(path);
+                allItemsToRename = JsonUtil.loadRenames(pathItems);
             }
-            if (targetFormat > 15 && currentFormatFromUser <= 15) {
-                //1.20 in 1.20.2
-                createoffhand = true;
 
-                Path pathWidgets = Paths.get("src","main", "resources", "packformats", "packformat14To15", "0_widgetsIcons.json");
-                allWidgetsIcons = JsonUtil.loadGuiSplits(pathWidgets.toString());
+            if (targetFormat > 15 && currentFormatFromUser <= 15) {
+                createoffhand = true;
+                String pathWidgets = getResourcePath("packformats", "packformat14To15", "0_widgetsIcons.json");
+                allWidgetsIcons = JsonUtil.loadGuiSplits(pathWidgets);
             }
 
             if (targetFormat > 34 && currentFormatFromUser <= 34) {
-                //1.21 in 1.21.2
-
-                Path pathArmor = Paths.get("src","main", "resources", "packformats", "packformat33To34", "0_bodyarmor.json");
-                allArmors = JsonUtil.loadArmorMappings(pathArmor.toString());
-
+                String pathArmor = getResourcePath("packformats", "packformat33To34", "0_bodyarmor.json");
+                allArmors = JsonUtil.loadArmorMappings(pathArmor);
             }
 
             ZipEntry entry;
@@ -470,6 +459,21 @@ public class Main {
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+    private static String getResourcePath(String... pathParts) throws IOException {
+        String resourcePath = String.join("/", pathParts);
+        InputStream inputStream = Main.class.getClassLoader().getResourceAsStream(resourcePath);
+
+        if (inputStream == null) {
+            throw new IOException("Resource nicht gefunden: " + resourcePath);
+        }
+        Path tempFile = Files.createTempFile("resource-", ".json");
+        tempFile.toFile().deleteOnExit(); // Wird beim Beenden gelöscht
+
+        Files.copy(inputStream, tempFile, StandardCopyOption.REPLACE_EXISTING);
+        inputStream.close();
+
+        return tempFile.toString();
     }
     private static void writeZipEntryIfNotExists(ZipOutputStream zipOutput, Set<String> alreadyWritten, String entryName, byte[] data) throws IOException {
         if (!alreadyWritten.contains(entryName)) {
