@@ -27,15 +27,16 @@ jobs:
 
       - name: Create EXE with jpackage
         run: |
-          # Wir suchen die JAR im target Ordner automatisch
-          $JAR_PATH = Get-ChildItem -Path target/AutoPackUpdater-*.jar | Select-Object -ExpandProperty Name
+          # Wir erstellen einen Zielordner für die EXE
+          mkdir output
           jpackage --input target/ `
                    --name AutoPackUpdater `
-                   --main-jar $JAR_PATH `
+                   --main-jar AutoPackUpdater-1.0-SNAPSHOT.jar `
                    --type exe `
                    --win-shortcut `
                    --win-menu `
-                   --vendor "Tobias"
+                   --vendor "Tobias" `
+                   --dest output
         shell: powershell
 
       - name: Update Latest Release
@@ -43,9 +44,9 @@ jobs:
         with:
           tag_name: latest
           name: "AutoPackUpdater: Latest Build"
-          body: "This release was automatically generated."
+          body: "Automated build. Download the .exe below."
           files: |
-            target/AutoPackUpdater-*.jar
-            AutoPackUpdater.exe
+            target/AutoPackUpdater-1.0-SNAPSHOT.jar
+            output/*.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
