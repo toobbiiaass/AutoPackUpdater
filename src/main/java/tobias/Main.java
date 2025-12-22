@@ -136,7 +136,7 @@ public class Main {
 
             if (targetFormat > 1 && currentFormatFromUser <= 1) {
                 //1.8 in 1.9
-                Path pathParticles = Paths.get("src", "packformats", "packformat1To2", "0_particles.json");
+                Path pathParticles = Paths.get("src","main","resources", "packformats", "packformat1To2", "0_particles.json");
                 allParticleEntries = JsonUtil.loadParticles(pathParticles.toString());
                 needNethGen = true;
                 needNewInv = true;
@@ -145,8 +145,8 @@ public class Main {
             }
             if (targetFormat > 3 && currentFormatFromUser <= 3) {
                 //1.11 in 1.13
-                Path path = Paths.get("src", "packformats", "packformat2To3", "0_folders_rename.json");
-                Path pathItems = Paths.get("src", "packformats", "packformat2To3", "1_items_rename.json");
+                Path path = Paths.get("src","main", "resources", "packformats", "packformat2To3", "0_folders_rename.json");
+                Path pathItems = Paths.get("src","main", "resources", "packformats", "packformat2To3", "1_items_rename.json");
 
                 allFoldersToRename = JsonUtil.loadRenames(path.toString());
                 allItemsToRename = JsonUtil.loadRenames(pathItems.toString());
@@ -155,14 +155,14 @@ public class Main {
                 //1.20 in 1.20.2
                 createoffhand = true;
 
-                Path pathWidgets = Paths.get("src", "packformats", "packformat14To15", "0_widgetsIcons.json");
+                Path pathWidgets = Paths.get("src","main", "resources", "packformats", "packformat14To15", "0_widgetsIcons.json");
                 allWidgetsIcons = JsonUtil.loadGuiSplits(pathWidgets.toString());
             }
 
             if (targetFormat > 34 && currentFormatFromUser <= 34) {
                 //1.21 in 1.21.2
 
-                Path pathArmor = Paths.get("src", "packformats", "packformat33To34", "0_bodyarmor.json");
+                Path pathArmor = Paths.get("src","main", "resources", "packformats", "packformat33To34", "0_bodyarmor.json");
                 allArmors = JsonUtil.loadArmorMappings(pathArmor.toString());
 
             }
