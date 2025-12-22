@@ -27,7 +27,6 @@ jobs:
 
       - name: Create EXE with jpackage
         run: |
-          # Wir erstellen einen Zielordner für die EXE
           mkdir output
           jpackage --input target/ `
                    --name AutoPackUpdater `
