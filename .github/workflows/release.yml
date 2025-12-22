@@ -30,7 +30,7 @@ jobs:
           mkdir output
           jpackage --input target/ `
                    --name AutoPackUpdater `
-                   --main-jar AutoPackUpdater-1.0-SNAPSHOT.jar `
+                   --main-jar AutoPackUpdater-1.0.jar `
                    --type exe `
                    --win-shortcut `
                    --win-menu `
