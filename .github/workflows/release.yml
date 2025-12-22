@@ -43,9 +43,9 @@ jobs:
         with:
           tag_name: latest
           name: "AutoPackUpdater: Latest Build"
-          body: "Automated build. Download the .exe below."
+          body: "Automated build!"
           files: |
-            target/AutoPackUpdater-1.0-SNAPSHOT.jar
+            target/AutoPackUpdater-1.0.jar
             output/*.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
