@@ -22,35 +22,30 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      # Neuer, sicherer Weg die Version auszulesen
-      - name: Get Version from Maven
-        id: get_version
-        run: |
-          $VER = mvn help:evaluate -Dexpression=project.version -q -DforceStdout
-          echo "VERSION=$VER" >> $env:GITHUB_OUTPUT
-        shell: powershell
-
       - name: Build with Maven
         run: mvn clean package
 
       - name: Create EXE with jpackage
         run: |
+          # Wir suchen die JAR im target Ordner automatisch
+          $JAR_PATH = Get-ChildItem -Path target/AutoPackUpdater-*.jar | Select-Object -ExpandProperty Name
           jpackage --input target/ `
                    --name AutoPackUpdater `
-                   --main-jar AutoPackUpdater-${{ steps.get_version.outputs.VERSION }}.jar `
+                   --main-jar $JAR_PATH `
                    --type exe `
                    --win-shortcut `
                    --win-menu `
                    --vendor "Tobias"
+        shell: powershell
 
       - name: Update Latest Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
-          name: "AutoPackUpdater: Version ${{ steps.get_version.outputs.VERSION }}"
-          body: "Automatic build for version ${{ steps.get_version.outputs.VERSION }}"
+          name: "AutoPackUpdater: Latest Build"
+          body: "This release was automatically generated."
           files: |
-            target/AutoPackUpdater-${{ steps.get_version.outputs.VERSION }}.jar
+            target/AutoPackUpdater-*.jar
             AutoPackUpdater.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
