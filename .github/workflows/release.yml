@@ -12,47 +12,45 @@ jobs:
       contents: write
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
 
-    # SCHRITT: Version aus der pom.xml auslesen
-    - name: Get Project Version
-      id: project_version
-      run: |
-        # Dieser Befehl zieht die <version> aus der pom.xml
-        $VERSION = [xml](Get-Content pom.xml).project.version
-        echo "VERSION=$VERSION" >> $env:GITHUB_OUTPUT
-      shell: powershell
+      # Neuer, sicherer Weg die Version auszulesen
+      - name: Get Version from Maven
+        id: get_version
+        run: |
+          $VER = mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+          echo "VERSION=$VER" >> $env:GITHUB_OUTPUT
+        shell: powershell
 
-    - name: Build with Maven
-      run: mvn clean package
+      - name: Build with Maven
+        run: mvn clean package
 
-    - name: Create EXE with jpackage
-      run: |
-        # Hier nutzen wir ${{ steps.project_version.outputs.VERSION }}
-        jpackage --input target/ `
-                 --name AutoPackUpdater `
-                 --main-jar AutoPackUpdater-${{ steps.project_version.outputs.VERSION }}.jar `
-                 --type exe `
-                 --win-shortcut `
-                 --win-menu `
-                 --vendor "Tobias"
+      - name: Create EXE with jpackage
+        run: |
+          jpackage --input target/ `
+                   --name AutoPackUpdater `
+                   --main-jar AutoPackUpdater-${{ steps.get_version.outputs.VERSION }}.jar `
+                   --type exe `
+                   --win-shortcut `
+                   --win-menu `
+                   --vendor "Tobias"
 
-    - name: Update Latest Release
-      uses: softprops/action-gh-release@v2
-      with:
-        tag_name: latest
-        name: "AutoPackUpdater: Version ${{ steps.project_version.outputs.VERSION }}"
-        body: "Automatic build for version ${{ steps.project_version.outputs.VERSION }}"
-        files: |
-          target/AutoPackUpdater-${{ steps.project_version.outputs.VERSION }}.jar
-          AutoPackUpdater.exe
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update Latest Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: "AutoPackUpdater: Version ${{ steps.get_version.outputs.VERSION }}"
+          body: "Automatic build for version ${{ steps.get_version.outputs.VERSION }}"
+          files: |
+            target/AutoPackUpdater-${{ steps.get_version.outputs.VERSION }}.jar
+            AutoPackUpdater.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
