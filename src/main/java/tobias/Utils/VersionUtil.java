@@ -22,8 +22,7 @@ public class VersionUtil {
             case "1.21" -> 34;
             case "1.21.2" -> 42;
             case "1.21.4" -> 46;
-            case "1.21.5" -> 55;
-            case "1.21.6" -> 63;
+            case "1.21.10" -> 88;
             default -> 1;
         };
     }
